@@ -59,11 +59,11 @@
 
         });
 
-        AFRAME.registerComponent('video-vidhandler2', {
+        AFRAME.registerComponent('handler-elst', {
             init: function () {
                 console.log('video init entered');
                 this.toggle = false;
-                this.vid = document.querySelector("#invitation2");
+                this.vid = document.querySelector("#div_elst");
                 this.vid.pause();
             },
             tick: function () {
@@ -113,7 +113,7 @@
                 <source src="videos/elst.mp4">
             </video>
 
-            <video preload="none" id="invitation2" response-type="arraybuffer" loop="false" crossorigin
+            <video preload="none" id="div_elst" response-type="arraybuffer" loop="false" crossorigin
                 webkit-playsinline playsinline controls>
                 <source src="videos/elst.mp4">
             </video>
@@ -122,8 +122,8 @@
 
         </a-assets>
 
-        <a-marker type='barcode' value='5' video-vidhandler2>
-            <a-plane scale="4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation2'
+        <a-marker type='barcode' value='5' handler-elst>
+            <a-plane scale="4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#div_elst'
                 controls></a-plane>
         </a-marker>
 
