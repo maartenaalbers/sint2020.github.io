@@ -82,27 +82,50 @@
             
         </script>
     </head>
-    <body style='margin : 0px; overflow: hidden;'>
-        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-        <a-scene embedded arjs='debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+    <body>
 
-        <a-assets>
-            <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
-        </a-assets>
+        <a-scene id="scene" arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false" ar-template >
+            
+            <a-assets>
 
-        <a-marker type='barcode' value='7'>
-            <a-box position='0 0.5 0' color="yellow"></a-box>
-        </a-marker>
+                
+                <!-- Invitation  Video -->
+                
+                <video preload="none" id="invitation" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
+                    <source  src="videos/elst.mp4">
+                </video>
 
-        <a-marker id="animated-marker" type='barcode' value='6'>
-            <a-entity
-                gltf-model="#animated-asset"
-                scale="2">
-            </a-entity>
-        </a-marker>
+                <!-- Map point Image -->
 
-        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
-        <a-entity camera></a-entity>
+                <img id="map-point" src="images/tekst.jpg">     
+
+            </a-assets>
+            
+           
+            
+            <!-- Invitation Video Marker -->
+
+            <a-marker id="marker1" type='pattern' url='markers/pattern-weerwolf.patt' video-vidhandler>
+                <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
+                <a-plane scale = "4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation' controls></a-plane>
+                <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
+            </a-marker>
+
+            <!-- Map Location Marker -->
+
+            <a-marker id="marker3" type='pattern' url='markers/pattern-weerwolf2.patt' emitevents="true" cursor="rayOrigin: mouse" mappoint-handler>
+                <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
+                <a-plane id="img-map" scale = "2 2" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#map-point'></a-plane>
+                <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
+            </a-marker>     
+            
+            
+            <!-- Camera -->
+
+            <a-entity camera></a-entity>
+
         </a-scene>
+
+
     </body>
 </html>
