@@ -45,7 +45,7 @@
 		    console.log('video init entered');
                     this.toggle = false;
                     this.vid = document.querySelector("#invitation");
-                    // this.vid.pause();
+                    this.vid.pause();
                 },
                 tick: function() {
                     if (this.el.object3D.visible == true) {
@@ -55,9 +55,31 @@
                         }
                     } else {
                         this.toggle = false;
-                        // this.vid.pause();
+                        this.vid.pause();
                     }
                 }
+                
+            });
+
+            AFRAME.registerComponent('video-vidhandler2', {
+                init: function() {
+		    console.log('video init entered');
+                    this.toggle = false;
+                    this.vid = document.querySelector("#invitation2");
+                    this.vid.pause();
+                },
+                tick: function() {
+                    if (this.el.object3D.visible == true) {
+                        if (!this.toggle) {
+                            this.toggle = true;
+                            this.vid.play();
+                        }
+                    } else {
+                        this.toggle = false;
+                        this.vid.pause();
+                    }
+                }
+                
             });
 
             
@@ -97,14 +119,19 @@
                     <source  src="videos/elst.mp4">
                 </video>
 
+                <video preload="none" id="invitation2" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
+                    <source  src="videos/elst.mp4">
+                </video>
+
+
                 <!-- Map point Image -->
 
                 <img id="map-point" src="images/tekst.jpg">     
 
             </a-assets>
             
-            <a-marker type='barcode' value='5' video-vidhandler>
-                <a-plane scale = "4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation' controls></a-plane>
+            <a-marker type='barcode' value='5' video-vidhandler2>
+                <a-plane scale = "4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation2' controls></a-plane>
            </a-marker>
             
             <!-- Invitation Video Marker -->
