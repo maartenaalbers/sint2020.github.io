@@ -28,104 +28,34 @@
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-     
-        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-        <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
-
-
-        <script>
-                       
-            // Invitation Video Handler
-            
-            AFRAME.registerComponent('video-vidhandler', {
-                init: function() {
-		    console.log('video init entered');
-                    this.toggle = false;
-                    this.vid = document.querySelector("#invitation");
-                    this.vid.pause();
-                },
-                tick: function() {
-                    if (this.el.object3D.visible == true) {
-                        if (!this.toggle) {
-                            this.toggle = true;
-                            this.vid.play();
-                        }
-                    } else {
-                        this.toggle = false;
-                        this.vid.pause();
-                    }
-                }
-            });
-
-            
-		
-	    AFRAME.registerComponent('mappoint-handler', {
-            
-		init: function() {
-		    //console.log("I was triggered");
-		    const marker3 = document.querySelector("#marker3");
-		    const imgMap = document.querySelector("#img-map");
-			
-		    marker3.addEventListener('click', function(ev, target) {
-		        const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
-			if (imgMap && intersectedElement === imgMap) {
-			    // console.log("Clicked");
-			    // document.location.href = "https://goo.gl/maps/gRsth6SHo5AgwMbT7";
-			}
-		    });
-		}
-	    });
-			
-            
-        </script>
     </head>
-    <body>
+    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    
+    <!-- add this script in order to load a large set of 3D model extensions-->
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    
+    <body style='margin : 0px; overflow: hidden;'>
+        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
 
-        <a-scene id="scene" arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false" ar-template >
-            
-            <a-assets>
+        <a-assets>
+            <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
+        </a-assets>
 
-                
-                <!-- Invitation  Video -->
-                
-                <video preload="none" id="invitation" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
-                    <source  src="videos/elst.mp4">
-                </video>
+        <a-marker type='barcode' value='7'>
+            <a-box position='0 0.5 0' color="yellow"></a-box>
+        </a-marker>
 
-                <!-- Map point Image -->
+        <a-marker id="animated-marker" type='barcode' value='6'>
+            <a-entity
+                gltf-model="#animated-asset"
+                scale="2">
+            </a-entity>
+        </a-marker>
 
-                <img id="map-point" src="images/tekst.jpg">     
-
-            </a-assets>
-            
-           
-            
-            <!-- Invitation Video Marker -->
-
-            <a-marker id="marker1" type='pattern' url='markers/pattern-weerwolf.patt' video-vidhandler>
-                <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
-                <a-plane scale = "4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation' controls></a-plane>
-                <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
-            </a-marker>
-
-            <!-- Map Location Marker -->
-
-            <a-marker id="marker3" type='pattern' url='markers/pattern-weerwolf2.patt' emitevents="true" cursor="rayOrigin: mouse" mappoint-handler>
-                <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
-                <a-plane id="img-map" scale = "2 2" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#map-point'></a-plane>
-                <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
-            </a-marker>     
-            
-            
-            <!-- Camera -->
-
-            <a-entity camera></a-entity>
-
+        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
+        <a-entity camera></a-entity>
         </a-scene>
-
-
     </body>
 </html>
