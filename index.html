@@ -63,7 +63,8 @@
 		init: function() {
 		    //console.log("I was triggered");
 		    const marker3 = document.querySelector("#marker3");
-		    const imgMap = document.querySelector("#img-map");
+            const imgMap = document.querySelector("#img-map");
+            const testje123 = document.querySelector("#testje123");
 			
 		    marker3.addEventListener('click', function(ev, target) {
 		        const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
@@ -93,7 +94,11 @@
 
                 <!-- Map point Image -->
 
-                <img id="map-point" src="images/tekst.jpg">     
+                <img id="map-point" src="images/tekst.jpg">   
+                
+                <div id="testje">
+                    <h3>TESTJE</h3>
+                </div>
 
             </a-assets>
             
@@ -115,8 +120,8 @@
             
             <a-marker id="marker2" type='pattern' url='markers/pattern-marker.patt' emitevents="true" cursor="rayOrigin: mouse" mappoint-handler>
                 <!-- <a-box position='0 0 0' material='color: red;'></a-box> -->
-                <!-- <a-plane id="img-map" scale = "2 2" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#map-point'></a-plane> -->
-                <a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: test 123"></a-entity>
+                <a-plane id="testje123" scale = "2 2" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#testje'></a-plane>
+                <!-- <a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: test 123"></a-entity> -->
             </a-marker>     
             
             
