@@ -28,13 +28,60 @@
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+     
+        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+        <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
+
+
+        <script>
+                       
+            // Invitation Video Handler
+            
+            AFRAME.registerComponent('video-vidhandler', {
+                init: function() {
+		    console.log('video init entered');
+                    this.toggle = false;
+                    this.vid = document.querySelector("#invitation");
+                    this.vid.pause();
+                },
+                tick: function() {
+                    if (this.el.object3D.visible == true) {
+                        if (!this.toggle) {
+                            this.toggle = true;
+                            this.vid.play();
+                        }
+                    } else {
+                        this.toggle = false;
+                        this.vid.pause();
+                    }
+                }
+            });
+
+            
+		
+	    AFRAME.registerComponent('mappoint-handler', {
+            
+		init: function() {
+		    //console.log("I was triggered");
+		    const marker3 = document.querySelector("#marker3");
+		    const imgMap = document.querySelector("#img-map");
+			
+		    marker3.addEventListener('click', function(ev, target) {
+		        const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+			if (imgMap && intersectedElement === imgMap) {
+			    // console.log("Clicked");
+			    // document.location.href = "https://goo.gl/maps/gRsth6SHo5AgwMbT7";
+			}
+		    });
+		}
+	    });
+			
+            
+        </script>
     </head>
-    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
-    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    
-    <!-- add this script in order to load a large set of 3D model extensions-->
-    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    
     <body style='margin : 0px; overflow: hidden;'>
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded arjs='debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
