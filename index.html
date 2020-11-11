@@ -1,162 +1,148 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-        <title> Sint 2020 </title>
-        <meta name="viewport" content="width=device-width,height=device-height">
-        <meta name="apple-mobile-web-app-capable" content="yes">
 
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />
-        
-        <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
+<head>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-     
-        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-        <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
+    <title> Sint 2020 </title>
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 
-        <script>
-                       
-            // Invitation Video Handler
-            
-            AFRAME.registerComponent('video-vidhandler', {
-                init: function() {
-		    console.log('video init entered');
-                    this.toggle = false;
-                    this.vid = document.querySelector("#invitation");
-                    this.vid.pause();
-                },
-                tick: function() {
-                    if (this.el.object3D.visible == true) {
-                        if (!this.toggle) {
-                            this.toggle = true;
-                            this.vid.play();
-                        }
-                    } else {
-                        this.toggle = false;
-                        this.vid.pause();
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css">
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
+
+    <script>
+        AFRAME.registerComponent('video-vidhandler', {
+            init: function () {
+                console.log('video init entered');
+                this.toggle = false;
+                this.vid = document.querySelector("#invitation");
+                this.vid.pause();
+            },
+            tick: function () {
+                if (this.el.object3D.visible == true) {
+                    if (!this.toggle) {
+                        this.toggle = true;
+                        this.vid.play();
                     }
-                }
-                
-            });
-
-            AFRAME.registerComponent('video-vidhandler2', {
-                init: function() {
-		    console.log('video init entered');
+                } else {
                     this.toggle = false;
-                    this.vid = document.querySelector("#invitation2");
                     this.vid.pause();
-                },
-                tick: function() {
-                    if (this.el.object3D.visible == true) {
-                        if (!this.toggle) {
-                            this.toggle = true;
-                            this.vid.play();
-                        }
-                    } else {
-                        this.toggle = false;
-                        this.vid.pause();
-                    }
                 }
-                
-            });
+            }
 
-            
-		
-	    AFRAME.registerComponent('mappoint-handler', {
-            
-		init: function() {
-		    //console.log("I was triggered");
-		    const marker3 = document.querySelector("#marker3");
-		    const imgMap = document.querySelector("#img-map");
-			
-		    marker3.addEventListener('click', function(ev, target) {
-		        const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
-			if (imgMap && intersectedElement === imgMap) {
-			    // console.log("Clicked");
-			    // document.location.href = "https://goo.gl/maps/gRsth6SHo5AgwMbT7";
-			}
-		    });
-		}
-	    });
-			
-            
-        </script>
-    </head>
-    <body>
+        });
 
-        <a-scene id="scene" arjs='trackingMethod: best; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' vr-mode-ui="enabled: false" ar-template >
-            
-           
-           
-            <a-assets>
+        AFRAME.registerComponent('video-vidhandler2', {
+            init: function () {
+                console.log('video init entered');
+                this.toggle = false;
+                this.vid = document.querySelector("#invitation2");
+                this.vid.pause();
+            },
+            tick: function () {
+                if (this.el.object3D.visible == true) {
+                    if (!this.toggle) {
+                        this.toggle = true;
+                        this.vid.play();
+                    }
+                } else {
+                    this.toggle = false;
+                    this.vid.pause();
+                }
+            }
 
-                
-                <!-- Invitation  Video -->
-                
-                <video preload="none" id="invitation" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
-                    <source  src="videos/elst.mp4">
-                </video>
+        });
 
-                <video preload="none" id="invitation2" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
-                    <source  src="videos/elst.mp4">
-                </video>
+        AFRAME.registerComponent('mappoint-handler', {
+
+            init: function () {
+                //console.log("I was triggered");
+                const marker3 = document.querySelector("#marker3");
+                const imgMap = document.querySelector("#img-map");
+
+                marker3.addEventListener('click', function (ev, target) {
+                    const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+                    if (imgMap && intersectedElement === imgMap) {
+                        // console.log("Clicked");
+                        // document.location.href = "https://goo.gl/maps/gRsth6SHo5AgwMbT7";
+                    }
+                });
+            }
+        });
 
 
-                <!-- Map point Image -->
+    </script>
+</head>
 
-                <img id="map-point" src="images/tekst.jpg">     
+<body>
 
-            </a-assets>
-            
-            <a-marker type='barcode' value='5' video-vidhandler2>
-                <a-plane scale = "4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation2' controls></a-plane>
-           </a-marker>
-            
-            <!-- Invitation Video Marker -->
+    <a-scene id="scene"
+        arjs='trackingMethod: best; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'
+        vr-mode-ui="enabled: false" ar-template>
 
-            <a-marker id="marker1" type='pattern' url='markers/pattern-weerwolf.patt' video-vidhandler>
-                <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
-                <a-plane scale = "4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation' controls></a-plane>
-                <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
-            </a-marker>
+        <a-assets>
+            <video preload="none" id="invitation" response-type="arraybuffer" loop="false" crossorigin
+                webkit-playsinline playsinline controls>
+                <source src="videos/elst.mp4">
+            </video>
 
-            <!-- Map Location Marker -->
+            <video preload="none" id="invitation2" response-type="arraybuffer" loop="false" crossorigin
+                webkit-playsinline playsinline controls>
+                <source src="videos/elst.mp4">
+            </video>
 
-            <a-marker id="marker3" type='pattern' url='markers/pattern-weerwolf2.patt' emitevents="true" cursor="rayOrigin: mouse" mappoint-handler>
-                <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
-                <a-plane id="img-map" scale = "2 2" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#map-point'></a-plane>
-                <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
-            </a-marker>     
-            
-            
-            <!-- Camera -->
+            <img id="map-point" src="images/tekst.jpg">
 
-            <a-entity camera></a-entity>
+        </a-assets>
 
-        </a-scene>
+        <a-marker type='barcode' value='5' video-vidhandler2>
+            <a-plane scale="4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation2'
+                controls></a-plane>
+        </a-marker>
+
+        <a-marker id="marker1" type='pattern' url='markers/pattern-weerwolf.patt' video-vidhandler>
+            <a-plane scale="4 3" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation'
+                controls></a-plane>
+        </a-marker>
 
 
-    </body>
+        <a-marker id="marker3" type='pattern' url='markers/pattern-weerwolf2.patt' emitevents="true"
+            cursor="rayOrigin: mouse" mappoint-handler>
+            <a-plane id="img-map" scale="2 2" position='0 0.1 0' rotation="-90 0 0"
+                material='transparent:true;src:#map-point'></a-plane>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+
+    </a-scene>
+
+</body>
+
 </html>
