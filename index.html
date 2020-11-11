@@ -84,8 +84,12 @@
     </head>
     <body>
 
-        <a-scene id="scene" arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false" ar-template >
+        <a-scene id="scene" arjs='trackingMethod: best; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' vr-mode-ui="enabled: false" ar-template >
             
+            <a-marker type='barcode' value='5'>
+                <a-box></a-box>
+           </a-marker>
+           
             <a-assets>
 
                 
